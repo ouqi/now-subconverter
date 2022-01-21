@@ -84,7 +84,7 @@ jobs:
       id: get_sha
       uses: mego22/actions-git-sha@main
       with:
-        repo: "https://github.com/tindy2013/subconverter.git"
+        repo: "https://github.com/ouqi/subconverter.git"
     - name: '[action]Wait for build to succeed'
       if: ${{ env.branch == 'action' }}
       uses: fountainhead/action-wait-for-check@v1.0.0
@@ -117,7 +117,7 @@ jobs:
       if: ${{ env.branch == 'build' }}
       run: |
         cd /tmp
-        git clone https://github.com/tindy2013/subconverter.git
+        git clone https://github.com/ouqi/subconverter.git
     - name: '[build]Build'
       if: ${{ env.branch == 'build' }}
       run: docker run -v /tmp/subconverter:/root/workdir multiarch/alpine:amd64-latest-stable /bin/sh -c "apk add bash git nodejs npm && cd /root/workdir && chmod +x scripts/build.alpine.release.sh && bash scripts/build.alpine.release.sh"
@@ -153,7 +153,7 @@ jobs:
           cp -f subconverter/pref.example.ini subconverter/pref.ini
         fi
         sed -i 's/api_mode=false/api_mode=true/g' subconverter/pref.ini
-        sed -i 's/managed_config_prefix=http:\/\/127.0.0.1:25500/managed_config_prefix=https:\/\/sub-beta.vercel.app/g' subconverter/pref.ini
+        sed -i 's/managed_config_prefix=http:\/\/127.0.0.1:25500/managed_config_prefix=https:\/\/sub.9me.net/g' subconverter/pref.ini
         sed -i 's/async_fetch_ruleset=false/async_fetch_ruleset=true/g' subconverter/pref.ini
         sed -i 's/max_concurrent_threads=./max_concurrent_threads=1/g' subconverter/pref.ini
     - name: Modify pref.ini by files
